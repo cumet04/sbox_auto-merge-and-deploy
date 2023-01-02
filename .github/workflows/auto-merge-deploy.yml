@@ -1,0 +1,12 @@
+name: auto merge deploy
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  auto-merge-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.pull_request.auto_merge != null
+    steps:
+      - uses: ./.github/workflows/deploy.yml
