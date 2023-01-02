@@ -9,4 +9,5 @@ jobs:
     timeout-minutes: 5
     if: github.event.pull_request.auto_merge != null
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/deploy.yml
