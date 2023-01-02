@@ -1,13 +1,17 @@
 name: notify deployment failed
 on:
-  check_suite:
-    types: [completed]
+  status
 
 jobs:
   notify-deployment-faield:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: github.event.check_suite.conclusion != "success"
-    # TODO: あとauto-mergeがenabledかどうかのチェック
+    if: >-
+      github.event.state == 'error' ||
+      github.event.state == 'failure'
     steps:
-      - run: echo -e "CIが失敗したためリリースを中断します\n[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
+      - run: |
+          PR_URI="/repos/${{ github.event.repository.full_name }}/pulls/${{ github.event.check_suite.pull_requests[0].number }}"
+          if [[ gh api "${PR_URI}?head=${{ github.event.branches[0].name }}" | jq --exit-status .auto_merge > /dev/null  ]]; then
+            echo -e "CIが失敗したためリリースを中断します"
+          fi
