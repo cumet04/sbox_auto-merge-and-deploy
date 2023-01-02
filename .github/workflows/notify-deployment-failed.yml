@@ -1,0 +1,13 @@
+name: notify deployment failed
+on:
+  check_suite:
+    types: [completed]
+
+jobs:
+  notify-deployment-faield:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.check_suite.conclusion != "success"
+    # TODO: あとauto-mergeがenabledかどうかのチェック
+    steps:
+      - run: echo -e "CIが失敗したためリリースを中断します\n[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
