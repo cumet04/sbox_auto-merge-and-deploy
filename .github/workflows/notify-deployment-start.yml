@@ -1,6 +1,7 @@
 name: notify deployment start
 on:
-  pull_request: [auto_merge_enabled]
+  pull_request:
+    types: [auto_merge_enabled]
 
 jobs:
   notify-deployment-start:
