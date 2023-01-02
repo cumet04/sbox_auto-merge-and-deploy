@@ -9,5 +9,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - run: echo "Start deploy"
-      - run: sleep 30
+      - run: |
+          echo "deploy these files:"
+          ls
+      - run: sleep 10
       - run: echo "Complete deploy"
