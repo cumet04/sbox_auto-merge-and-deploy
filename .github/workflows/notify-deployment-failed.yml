@@ -7,7 +7,7 @@ jobs:
   notify-deployment-faield:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: github.event.check_suite.conclusion != "success"
+    #if: github.event.check_suite.conclusion != "success"
     steps:
       - run: |
           PR_URI="/repos/${{ github.event.repository.full_name }}/pulls/${{ github.event.check_suite.pull_requests[0].number }}"
