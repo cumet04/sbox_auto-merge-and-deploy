@@ -1,0 +1,12 @@
+name: deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: echo "Start deploy"
+      - run: sleep 30
+      - run: echo "Complete deploy"
