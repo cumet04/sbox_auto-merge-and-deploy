@@ -8,10 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v3
-      - run: echo "Start deploy"
-      - run: |
-          echo "deploy these files:"
-          ls
+      - run: echo "Start deploy ${{ github.sha }}"
       - run: sleep 10
       - run: echo "Complete deploy"
